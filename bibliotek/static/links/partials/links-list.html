@@ -1,0 +1,38 @@
+<div class="row-fluid">
+    <div class="span3">
+        <h2>Search</h2>
+        <form class="form-search">
+            <div class="input-append">
+                <input ng-model="query" type="text" class="span8 search-query">
+                <button type="submit" class="btn">Search</button>
+            </div>
+
+        </form>
+        <div ng-controller="LinkAddCtrl">
+            <h2>Add Link</h2>
+            <form ng-submit="addLink()">
+                <fieldset>
+                    <legend>Link</legend>
+                    <label>URL</label>
+                    <input class="input-xlarge" ng-model="linkUrl" type="text" placeholder="">
+                    <label>Title</label>
+                    <input class="input-xlarge"ng-model="linkTitle" type="text" placeholder="">
+                    <label>Tags (separate with space)</label>
+                    <input class="input-xlarge" ng-model="linkTags" type="text" placeholder="">
+                    </label>
+                    <br />
+                    <button type="submit" class="btn">Submit</button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+    <div class="span9">
+        <h2>Links ({{ filtered.length }})</h2>
+        <ul class="unstyled">
+            <li ng-repeat="link in links | orderBy:'id':true | startFrom:currentPage*pageSize | limitTo:pageSize">
+                <a target="_blank" href="{{ link.url }}">{{ link.title }}</a> (<a href="#/edit/{{ link.id }}"><i class="icon-edit"></i></a> | <a href="" ng-click="remove(link.id)"><i class="icon-remove"></i></a>) - <span class="muted">Added: {{ link.added }}</span> <span class="muted" ng-show="link.tags">- Tags: {{ link.tags }}</span>{{ link.id }}
+            </li>
+        </ul>
+    </div>
+</div>

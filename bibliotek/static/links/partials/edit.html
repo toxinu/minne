@@ -1,0 +1,20 @@
+<div class="row-fluid">
+    <div class="span12">
+        <h2>Edit Link</h2>
+        <form ng-submit="edit()">
+            <fieldset>
+                <legend>Link</legend>
+                <label>URL</label>
+                <input class="input-xxlarge" ng-model="link.url" type="text">
+                <label>Title</label>
+                <input class="input-xxlarge" ng-model="link.title" type="text">
+                <label>Tags (separate with space)</label>
+                <input class="input-xlarge" ng-model="link.tags" type="text">
+                </label>
+                <br />
+                <button type="submit" class="btn btn-success">Edit</button>
+                <button ng-click="cancel()" class="btn">Cancel</button>
+            </fieldset>
+        </form>
+    </div>
+</div>
