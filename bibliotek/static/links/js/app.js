@@ -1,4 +1,4 @@
-var app = angular.module('linksApp', ['ngCookies', 'linksServices']).
+var myApp = angular.module('linksApp', ['ngCookies', 'linksServices']).
     config(['$routeProvider', function($routeProvider) {
     $routeProvider.
         when('/', {templateUrl: '/static/links/partials/links-list.html', controller: LinkListCtrl}).
@@ -7,9 +7,13 @@ var app = angular.module('linksApp', ['ngCookies', 'linksServices']).
         otherwise({redirectTo: '/'});
 }]);
 
-app.filter('startFrom', function() {
-    return function(input, start) {
-        start = +start;
-        return input.slice(start);
-    }
+myApp.directive('fadey', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, elm, attrs) {
+            jQuery(elm)
+                .css({ opacity: 0 })
+                .animate({ opacity: 1 }, parseInt(attrs.fadey));
+        }
+    };
 });

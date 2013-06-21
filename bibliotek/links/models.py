@@ -1,6 +1,5 @@
 import requests
 import datetime
-
 from django.db import models
 from django.contrib import admin
 
@@ -20,7 +19,7 @@ class Link(models.Model):
                 self.title = self.url
             else:
                 soup = BeautifulSoup(_r.text)
-                self.title = unicode(soup.title.string)
+                self.title = soup.title.string.encode('latin-1')
         super(Link, self).save(*args, **kwargs)
 
     def __unicode__(self):

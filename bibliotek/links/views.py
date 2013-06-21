@@ -1,3 +1,5 @@
+import json
+
 from bibliotek.links.models import Link
 from django.core.paginator import Paginator
 from django.core.paginator import EmptyPage
@@ -8,13 +10,15 @@ from rest_framework.views import APIView
 from bibliotek.links.serializers import LinkSerializer
 from bibliotek.links.serializers import PaginatedLinkSerializer
 from rest_framework import status
+from django.shortcuts import render_to_response
+from rest_framework.filters import SearchFilter
+from django.http import HttpResponse
 
 
 class LinkList(APIView):
     def get(self, request, format=None):
-        links = Link.objects.all()
-        paginator = Paginator(links, 10)
-
+        links = Link.objects.order_by('-id')
+        paginator = Paginator(links, 20)
         page = request.QUERY_PARAMS.get('page')
 
         try:
@@ -64,3 +68,17 @@ class LinkDetail(APIView):
             return Response(serializer.data)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+def links_search(request):
+    objects = Link.objects.all()
+    res = []
+    for r in objects:
+        link = {
+            "title": r.title,
+            "url": r.url,
+            "tags": r.tags,
+            "added": r.added.strftime('%y/%m/%d')}
+        res.append(link)
+    return HttpResponse(json.dumps(res), content_type="application/json")
+    #return render_to_response('my_app/template.html', {'filter': filter})
