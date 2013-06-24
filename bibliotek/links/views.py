@@ -4,6 +4,7 @@ from bibliotek.links.models import Link
 from django.core.paginator import Paginator
 from django.core.paginator import EmptyPage
 from django.core.paginator import PageNotAnInteger
+from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -18,7 +19,7 @@ from django.http import HttpResponse
 class LinkList(APIView):
     def get(self, request, format=None):
         links = Link.objects.order_by('-id')
-        paginator = Paginator(links, 20)
+        paginator = Paginator(links, 30)
         page = request.QUERY_PARAMS.get('page')
 
         try:
@@ -75,10 +76,10 @@ def links_search(request):
     res = []
     for r in objects:
         link = {
+            "id": r.id,
             "title": r.title,
             "url": r.url,
             "tags": r.tags,
             "added": r.added.strftime('%y/%m/%d')}
         res.append(link)
     return HttpResponse(json.dumps(res), content_type="application/json")
-    #return render_to_response('my_app/template.html', {'filter': filter})

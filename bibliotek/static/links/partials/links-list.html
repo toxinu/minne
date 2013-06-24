@@ -1,27 +1,27 @@
 <div class="row-fluid">
     <div class="span3">
-        <div data-spy="affix" data-offset-top="200">
+        <div data-spy="affix">
             <h2>Search</h2>
             <form class="form-search">
-                <div class="input-append">
-                    <input ng-model="query" type="text" class="span8 search-query">
-                    <button type="submit" class="btn" ng-click="search(search-query)">Search</button>
-                </div>
-
+                <input ng-model="query" class="input-xlarge" name="search" id="search" type="text" autofocus="autofocus" />
+                <br />
+                <br />
+                <button type="submit" class="btn" ng-click="search(query)">Search</button>
             </form>
             <div ng-controller="LinkAddCtrl">
                 <h2>Add Link</h2>
-                <form ng-submit="addLink()">
+                <form id="add-link" ng-submit="addLink(url, title, tags)">
                     <fieldset>
                         <label>URL</label>
-                        <input class="input-xlarge" ng-model="linkUrl" type="text" placeholder="">
+                        <input class="input-xlarge" ng-model="url" type="text">
                         <label>Title</label>
-                        <input class="input-xlarge"ng-model="linkTitle" type="text" placeholder="">
+                        <input class="input-xlarge"ng-model="title" type="text">
                         <label>Tags (separate with space)</label>
-                        <input class="input-xlarge" ng-model="linkTags" type="text" placeholder="">
+                        <input class="input-xlarge" ng-model="tags" type="text">
                         </label>
                         <br />
                         <button type="submit" class="btn btn-success">Submit</button>
+                        <input type="reset" class="btn btn-warning" value="Reset Form">
                     </fieldset>
                 </form>
             </div>
@@ -30,11 +30,12 @@
 
     <div class="span9">
         <h2>Links ({{ info.count }})</h2>
-        <ul id="links-list" class="unstyled">
+        <ul ng-show="links" id="links-list" class="unstyled">
             <li data-id="{{ link.id }}" ng-repeat="link in links | orderBy:'id':true" fadey="500">
                 <a target="_blank" href="{{ link.url }}">{{ link.title }}</a> (<a href="#/edit/{{ link.id }}"><i class="icon-edit"></i></a> | <a href="" ng-click="remove($index)"><i class="icon-remove"></i></a>) - <span class="muted">Added: {{ link.added }}</span> <span class="muted" ng-show="link.tags">- Tags: {{ link.tags }}</span>
             </li>
         </ul>
-        <button id="load-more" class="btn btn-primary" ng-click="loadMore()" style="width: 100%"> Load More </button>
+        <p ng-show="links.length == 0">No links, sorry...</p>
+        <button fadey="700" ng-show="!inSearch" id="load-more" class="btn btn-primary" ng-click="loadMore()" style="width: 100%"> Load More </button>
     </div>
 </div>

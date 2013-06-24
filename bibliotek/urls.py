@@ -8,12 +8,13 @@ from bibliotek.links.models import Link
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', include('bibliotek.links.urls')),
+    url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'links/login.html'}),
+    url(r'^logout/$', 'django.contrib.auth.views.logout'),
     url(r'^api/links/(?P<pk>[0-9]+)', views.LinkDetail.as_view()),
     url(r'^api/links/search', views.links_search),
     url(r'^api/links', views.LinkList.as_view()),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    url(r'^$', include('bibliotek.links.urls')),
 )
 
 if settings.DEBUG:
