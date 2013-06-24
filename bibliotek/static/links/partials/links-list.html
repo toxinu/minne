@@ -1,6 +1,6 @@
-<div class="row-fluid">
-    <div class="span3">
-        <div data-spy="affix">
+<div class="row-fluid" fadey="400">
+    <div id="menu" class="span3">
+        <div id="nav-bar" data-spy="affix">
             <h2>Search</h2>
             <form class="form-search">
                 <input ng-model="query" class="input-xlarge" name="search" id="search" type="text" autofocus="autofocus" />
@@ -29,13 +29,13 @@
     </div>
 
     <div class="span9">
-        <h2>Links ({{ info.count }})</h2>
-        <ul ng-show="links" id="links-list" class="unstyled">
+        <h2 fadey="500">Links ({{ info.count }})</h2>
+        <ul ng-show="links.length >= 1" id="links-list" class="unstyled">
             <li data-id="{{ link.id }}" ng-repeat="link in links | orderBy:'id':true" fadey="500">
                 <a target="_blank" href="{{ link.url }}">{{ link.title }}</a> (<a href="#/edit/{{ link.id }}"><i class="icon-edit"></i></a> | <a href="" ng-click="remove($index)"><i class="icon-remove"></i></a>) - <span class="muted">Added: {{ link.added }}</span> <span class="muted" ng-show="link.tags">- Tags: {{ link.tags }}</span>
             </li>
         </ul>
         <p ng-show="links.length == 0">No links, sorry...</p>
-        <button fadey="700" ng-show="!inSearch" id="load-more" class="btn btn-primary" ng-click="loadMore()" style="width: 100%"> Load More </button>
+        <button fadey="700" ng-show="!inSearch && info.next" id="load-more" class="btn btn-primary" ng-click="loadMore()" style="width: 100%"> Load More </button>
     </div>
 </div>

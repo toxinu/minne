@@ -1,7 +1,5 @@
 {% extends "links/base.html" %}
 
-
-
 {% block content %}
 <style type="text/css">
   body {
@@ -52,13 +50,9 @@
       {% endif %}
       <form id="welcome-form" method="POST" action="{% url 'django.contrib.auth.views.login' %}">
         {% csrf_token %}
+        <input style="display: none" name="username" id="username" type="hidden" value="admin" />
         <div class="control-group">
-          <input style="width: 210px" name="username" id="username" type="text" autofocus="autofocus"/ >
-          <i class="icon-user field-icon"></i>
-          <label id="username-label" class="field-label" for="username">Username</label>
-        </div>
-        <div class="control-group">
-          <input style="width: 210px" name="password" id="password" type="password" />
+          <input style="width: 210px" name="password" id="password" type="password" autofocus="autofocus" />
           <i class="icon-lock field-icon"></i>
           <label id="password-label" class="field-label" for="password">Password</label>
         </div>

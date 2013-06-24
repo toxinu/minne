@@ -19,7 +19,7 @@ class Link(models.Model):
                 self.title = self.url
             else:
                 soup = BeautifulSoup(_r.text)
-                self.title = soup.title.string.encode('latin-1')
+                self.title = soup.title.string.encode('utf-8')
         super(Link, self).save(*args, **kwargs)
 
     def __unicode__(self):

@@ -1,6 +1,6 @@
-<div class="row-fluid">
+<div class="row-fluid" fadey="300">
     <div class="span12">
-        <h2>Add Links</h2>
+        <h2>Add Link</h2>
         <form id="add-link" ng-submit="addLink(url, title, tags, true)">
             <fieldset>
                 <label>URL</label>
@@ -11,7 +11,8 @@
                 <input class="input-xlarge" ng-model="tags" type="text">
                 </label>
                 <br />
-                <button type="submit" class="btn">Submit</button>
+                <button type="submit" class="btn btn-success">Submit</button>
+                <input type="reset" class="btn btn-warning" value="Reset Form">
             </fieldset>
         </form>
     </div>

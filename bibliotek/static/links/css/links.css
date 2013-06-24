@@ -1,5 +1,9 @@
-
-
+a {
+text-decoration: none!important;
+}
+li {
+font-size: 13px;
+}
 #load-more {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -68,11 +72,18 @@
   transition: 0.25s;
 }
 
-.setup #password, .setup #username {
+.setup #password {
   padding-left: 100px;
   padding-right: 36px;
 }
 
 .setup .control-group {
   position: relative;
+}
+#menu input {
+  /*width: 150%;*/
+}
+
+.nav>li:first-child.active>a {
+  padding-left: 18px !important;
 }

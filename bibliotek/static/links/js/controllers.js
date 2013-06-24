@@ -1,6 +1,6 @@
-function LinkListCtrl($scope, $http, Link) {
+function LinkListCtrl($scope, $http, $location, Link) {
     $scope.refresh = function(page) {
-        if (page) {
+        if (page && $scope.info.next) {
             $scope.links = [];
             $scope.currentPage = 1;
             for (var i=0;i<=page;i++)
@@ -13,17 +13,25 @@ function LinkListCtrl($scope, $http, Link) {
                 $scope.info = data;
                 $scope.currentPage = 1;
                 $scope.inSearch = false;
+            }, function(data) {
+                if (data.status === 403 || data.status === 401)
+                    window.location = '/login';
             });
         }
     }
 
     $scope.loadMore = function(){
-        Link.query({page:$scope.currentPage+1}, function(data){
-            $scope.currentPage = $scope.currentPage + 1;
-            $scope.links = $scope.links.concat(data.results);
-            delete data.results;
-            $scope.info = data;
-        });
+        if ($scope.info.next) {
+            Link.query({page:$scope.currentPage+1}, function(data){
+                $scope.currentPage = $scope.currentPage + 1;
+                $scope.links = $scope.links.concat(data.results);
+                delete data.results;
+                $scope.info = data;
+            }, function(data) {
+                if (data.status === 403 || data.status === 401)
+                    window.location = '/login';
+            });
+        }
     };
 
     $scope.remove = function(linkIndex) {
@@ -32,11 +40,19 @@ function LinkListCtrl($scope, $http, Link) {
 
         $scope.links.splice(linkIndex, 1);
 
+        if ($scope.info.count <= 30)
+            $scope.info.next = false;
+
         Link.delete({id: linkId}, function() {
-            Link.query({page:$scope.currentPage}, function(data) {
-                $scope.links.push(data.results[data.results.length-1]);
-                $scope.indexModified = true;
-            });
+            if ($scope.info.next) {
+                Link.query({page:$scope.currentPage}, function(data) {
+                    $scope.links.push(data.results[data.results.length-1]);
+                    $scope.indexModified = true;
+                }, function(data) {
+                if (data.status === 403 || data.status === 401)
+                    window.location = '/login';
+                });
+            }
         });
     }
 
@@ -68,7 +84,11 @@ function LinkListCtrl($scope, $http, Link) {
 
     $scope.$on('add', function(event, data) {
         $scope.links.unshift(data);
-        $scope.links.pop();
+        console.log($scope.currentPage)
+        if ($scope.links.length > 30 && $scope.currentPage == 1) {
+            $scope.info.next = true;
+            $scope.links.pop();
+        }
         $scope.info.count = $scope.info.count + 1;
         $scope.indexModified = true;
     });
@@ -94,13 +114,16 @@ function LinkListCtrl($scope, $http, Link) {
 
             if (callback)
                 return callback();
+        }).error(function(data) {
+            if (data.status === 403 || data.status === 401)
+                window.location = '/login';
         });
-
     }
 
     $scope.refresh();
     $scope.indexModified = false;
     $scope.inSearch = false;
+    document.getElementById('nav-bar').className = "affix";
 }
 
 function LinkAddCtrl($scope, $http, $location, Link, showAlert) {
@@ -111,6 +134,7 @@ function LinkAddCtrl($scope, $http, $location, Link, showAlert) {
     }
 
     $scope.resetForm = function() {
+        document.getElementById('add-link').reset();
         $scope.form = defaultForm;
     }
 
@@ -123,9 +147,8 @@ function LinkAddCtrl($scope, $http, $location, Link, showAlert) {
 
         link.$save(function(data) {
             if (redirect)
-                $location.path('/');
+                $location.path('/#/');
             $scope.$emit('add', data);
-            document.getElementById('add-link').reset();
         }, function(data) {
             if (data.status === 400) {
                 var keys = Object.keys(data.data);
@@ -134,8 +157,9 @@ function LinkAddCtrl($scope, $http, $location, Link, showAlert) {
                     message = message + " " + keys[i].titleize() + " : " + data.data[keys[i]];
                 }
                 showAlert(message, 'error', 4000);
-            } else if (data.status !== 200) {
-                showAlert('Error ' + data.status, 'error', false);
+            } else {
+                if (data.status === 403 || data.status === 401)
+                    window.location = '/login';
             }
         });
     }
@@ -148,9 +172,11 @@ function LinkEditCtrl($scope, $http, $routeParams, $location, Link) {
         $scope.link.url = $scope.link.url;
         $scope.link.title = $scope.link.title;
         $scope.link.tags = $scope.link.tags;
-        console.log($scope.linkUrl);
         $scope.link.$update(function(data) {
             $location.path('/');
+        }, function(data) {
+            if (data.status === 403 || data.status === 401)
+                window.location = '/login';
         });
     }
     $scope.cancel = function() {
