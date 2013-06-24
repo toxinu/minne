@@ -1,5 +1,7 @@
 import json
+import datetime
 
+from time import mktime
 from bibliotek.links.models import Link
 from django.core.paginator import Paginator
 from django.core.paginator import EmptyPage
@@ -71,6 +73,15 @@ class LinkDetail(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@login_required
+def export(request):
+    links = Link.objects.all()
+    for link in links:
+        link.added = int(mktime(link.added.timetuple()))
+    return render_to_response('links/export.html', {"links": links, "date": datetime.datetime.now()})
+
+
+@login_required
 def links_search(request):
     objects = Link.objects.all()
     res = []

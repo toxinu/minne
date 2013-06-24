@@ -9,7 +9,8 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'links/login.html'}),
-    url(r'^logout/$', 'django.contrib.auth.views.logout'),
+    url(r'^logout/$', 'django.contrib.auth.views.logout', {'template_name': 'links/login.html'}),
+    url(r'^api/export/$', views.export),
     url(r'^api/links/(?P<pk>[0-9]+)', views.LinkDetail.as_view()),
     url(r'^api/links/search', views.links_search),
     url(r'^api/links', views.LinkList.as_view()),

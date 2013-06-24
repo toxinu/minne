@@ -103,14 +103,27 @@ function LinkListCtrl($scope, $http, Link) {
     $scope.inSearch = false;
 }
 
-function LinkAddCtrl($scope, $http, Link, showAlert) {
-    $scope.addLink = function(url, title, tags) {
+function LinkAddCtrl($scope, $http, $location, Link, showAlert) {
+    var defaultForm = {
+        url: '',
+        title: '',
+        tags: ''
+    }
+
+    $scope.resetForm = function() {
+        $scope.form = defaultForm;
+    }
+
+    $scope.addLink = function(url, title, tags, redirect) {
         var link = new Link();
         link.url = url;
         link.title = title;
         link.tags = tags;
-        console.log(link.url, link.title, link.tags)
+        $scope.resetForm();
+
         link.$save(function(data) {
+            if (redirect)
+                $location.path('/');
             $scope.$emit('add', data);
             document.getElementById('add-link').reset();
         }, function(data) {

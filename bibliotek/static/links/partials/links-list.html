@@ -10,14 +10,14 @@
             </form>
             <div ng-controller="LinkAddCtrl">
                 <h2>Add Link</h2>
-                <form id="add-link" ng-submit="addLink(url, title, tags)">
+                <form id="add-link" ng-submit="addLink(form.url, form.title, form.tags)">
                     <fieldset>
                         <label>URL</label>
-                        <input class="input-xlarge" ng-model="url" type="text">
+                        <input class="input-xlarge" ng-model="form.url" type="text">
                         <label>Title</label>
-                        <input class="input-xlarge"ng-model="title" type="text">
+                        <input class="input-xlarge" ng-model="form.title" type="text">
                         <label>Tags (separate with space)</label>
-                        <input class="input-xlarge" ng-model="tags" type="text">
+                        <input class="input-xlarge" ng-model="form.tags" type="text">
                         </label>
                         <br />
                         <button type="submit" class="btn btn-success">Submit</button>

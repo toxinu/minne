@@ -1,14 +1,14 @@
 <div class="row-fluid">
     <div class="span12">
         <h2>Add Links</h2>
-        <form ng-submit="addLink()">
+        <form id="add-link" ng-submit="addLink(url, title, tags, true)">
             <fieldset>
                 <label>URL</label>
-                <input class="input-xxlarge" ng-model="linkUrl" type="text" placeholder="">
+                <input class="input-xxlarge" ng-model="url" type="text">
                 <label>Title</label>
-                <input class="input-xxlarge" ng-model="linkTitle" type="text" placeholder="">
+                <input class="input-xxlarge" ng-model="title" type="text">
                 <label>Tags (separate with space)</label>
-                <input class="input-xlarge" ng-model="linkTags" type="text" placeholder="">
+                <input class="input-xlarge" ng-model="tags" type="text">
                 </label>
                 <br />
                 <button type="submit" class="btn">Submit</button>
