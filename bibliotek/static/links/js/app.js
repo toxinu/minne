@@ -6,10 +6,7 @@ var myapp = angular.module('linksApp', ['myApp.services', 'myApp.directives', 'n
         when('/import', {templateUrl: '/static/links/partials/import.html', controller: ImportCtrl}).
         when('/edit/:id', {templateUrl: '/static/links/partials/edit.html', controller: LinkEditCtrl}).
         otherwise({redirectTo: '/'});
-    }])
-    .run(function($http, $cookies) {
-        $http.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken;
-    });
+    }]);
 
 angular.module('myApp.directives', [])
     .directive('fadey', function() {
