@@ -1,6 +1,6 @@
 import datetime
 from django.core.management.base import BaseCommand, CommandError
-from bibliotek.links.models import Link
+from minne.links.models import Link
 from bs4 import BeautifulSoup
 
 

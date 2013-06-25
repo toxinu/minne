@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from rest_framework import serializers
 from rest_framework import pagination
-from bibliotek.links.models import Link
+from minne.links.models import Link
 
 
 class LinkSerializer(serializers.ModelSerializer):

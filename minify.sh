@@ -25,7 +25,7 @@ if [ -z "$BASE" ]; then
     exit 1
 fi
 
-STATIC_PATH=$BASE"/bibliotek/static/links"
+STATIC_PATH=$BASE"/minne/static/links"
 echo ":: Using path $STATIC_PATH"
 
 MINCSS=$(which uglifycss)
