@@ -3,9 +3,13 @@ var myapp = angular.module('linksApp', ['myApp.services', 'myApp.directives', 'n
     $routeProvider.
         when('/', {templateUrl: '/static/links/partials/links-list.html', controller: LinkListCtrl}).
         when('/add', {templateUrl: '/static/links/partials/add.html', controller: LinkAddCtrl}).
+        when('/import', {templateUrl: '/static/links/partials/import.html', controller: ImportCtrl}).
         when('/edit/:id', {templateUrl: '/static/links/partials/edit.html', controller: LinkEditCtrl}).
         otherwise({redirectTo: '/'});
-}]);
+    }])
+    .run(function($http, $cookies) {
+        $http.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken;
+    });
 
 angular.module('myApp.directives', [])
     .directive('fadey', function() {
@@ -37,4 +41,4 @@ angular.module('myApp.directives', [])
                 }
             }
         }
-    }])
+    }]);

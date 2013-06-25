@@ -19,7 +19,7 @@ DATABASES = {
     }
 }
 
-CSRF_COOKIE_NAME = "XSRF-TOKEN"
+#CSRF_COOKIE_NAME = "XSRF-TOKEN"
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',)
 }
@@ -88,7 +88,7 @@ TEMPLATE_LOADERS = (
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'bibliotek.middleware.AngularCSRFRename',
+#    'bibliotek.middleware.AngularCSRFRename',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',

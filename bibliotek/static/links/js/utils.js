@@ -7,3 +7,14 @@ String.prototype.titleize = function() {
   }
   return string
 }
+
+function switchPage(page) {
+    console.log('!!!')
+    var links = ['home', 'add', 'import'];
+    for (var i=0;i<links.length;i++) {
+        var link = document.getElementById(links[i] + '-bar');
+        link.className = "";
+        if (links[i] == page)
+            link.className = "active";
+    }
+}

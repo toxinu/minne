@@ -10,4 +10,4 @@ angular.module('myApp.services', ['ngResource'])
             var alert = $compile('<alert message="' + message + '" level="' + level + '" timeout="' + timeout + '"></alert>')($rootScope);
             angular.element(document.getElementById('notifications')).append(alert);
         }
-    }])
+    }]);

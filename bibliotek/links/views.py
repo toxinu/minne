@@ -74,7 +74,7 @@ class LinkDetail(APIView):
 
 
 @login_required
-def export(request):
+def export_bookmarks(request):
     links = Link.objects.all()
     for link in links:
         link.added = int(mktime(link.added.timetuple()))

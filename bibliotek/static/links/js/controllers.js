@@ -126,6 +126,9 @@ function LinkListCtrl($scope, $http, $location, Link) {
     document.getElementById('nav-bar').className = "affix";
 }
 
+function ImportCtrl($scope, $rootScope) {
+}
+
 function LinkAddCtrl($scope, $http, $location, Link, showAlert) {
     var defaultForm = {
         url: '',
