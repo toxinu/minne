@@ -33,7 +33,7 @@ MINJS=$(which uglifyjs)
 
 if [ -z $(which npm) ]; then
     echo "!! Need nodejs and npm to minify"
-    echo "!! Browser will use unminified CSS"
+    echo "!! Browser will use unminified JavaScript and CSS"
     MINCSS=cat
     # TODO cat will not work for JS because the syntax differs
     MINJS=
@@ -43,19 +43,54 @@ else
         sudo npm install -g uglifycss
         MINCSS=$(which uglifycss)
     fi
+    if [ -z "$MINJS" ]; then
+        echo ":: Installing js minifier"
+        sudo npm install -g uglify-js
+        MINJS=$(which uglifyjs)
+    fi
 fi
 
-echo ":: Minify css"
+echo ":: Minify javascript"
 
-$MINCSS $STATIC_PATH/css/font-awesome.css \
-    $STATIC_PATH/css/bootstrap-responsive.css \
-    $STATIC_PATH/css/links.css \
-    > $STATIC_PATH/css/links.min.css
-md5sum $STATIC_PATH/css/links.min.css
+if [ -z "$MINJS" ]; then
+    cat $STATIC_PATH/js/jquery-1.10.1.min.js.js  \
+        $STATIC_PATH/js/utils.js \
+        $STATIC_PATH/js/bootstrap.min.js \
+        $STATIC_PATH/js/lunr.min.js \
+        $STATIC_PATH/js/angular.min.js \
+        $STATIC_PATH/js/angular-resource.min.js \
+        $STATIC_PATH/js/angular-cookies.min.js \
+        $STATIC_PATH/js/services.js \
+        $STATIC_PATH/js/app.js \
+        $STATIC_PATH/js/controllers.js \
+        > $STATIC_PATH/js/links.min.js
+else
+    $MINJS $STATIC_PATH/js/jquery-1.10.1.min.js  \
+        $STATIC_PATH/js/utils.js \
+        $STATIC_PATH/js/bootstrap.min.js \
+        $STATIC_PATH/js/lunr.min.js \
+        $STATIC_PATH/js/angular.min.js \
+        $STATIC_PATH/js/angular-resource.min.js \
+        $STATIC_PATH/js/angular-cookies.min.js \
+        $STATIC_PATH/js/services.js \
+        $STATIC_PATH/js/app.js \
+        $STATIC_PATH/js/controllers.js \
+        -o $STATIC_PATH/js/links.min.js
+fi
+md5sum $STATIC_PATH/js/links.min.js
+
+echo ":: Minify css"
 
 for i in bootstrap flat-ui; do
     $MINCSS $STATIC_PATH/css/${i}.css > $STATIC_PATH/css/${i}.min.css
     md5sum $STATIC_PATH/css/${i}.min.css
 done
+
+$MINCSS $STATIC_PATH/css/flat-ui.min.css \
+    $STATIC_PATH/css/font-awesome.min.css \
+    $STATIC_PATH/css/bootstrap-responsive.css \
+    $STATIC_PATH/css/links.css \
+    > $STATIC_PATH/css/links.min.css
+md5sum $STATIC_PATH/css/links.min.css
 
 # end
