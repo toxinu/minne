@@ -14,7 +14,7 @@ class Command(BaseCommand):
         self.stdout.write('=> Importing %s...' % file_path.split('/')[-1])
         soup = BeautifulSoup(file.read())
 
-        for td in soup.find_all('dt'):
+        for td in soup.find_all('dt')[::-1]:
             self.stdout.write(td.a.get('href'))
             link = Link()
             link.title = td.a.text
@@ -23,4 +23,4 @@ class Command(BaseCommand):
             link.tags = td.a.get('tags').replace(',', ' ')
             link.save()
 
-        self.stdout.write('Successfully closed poll')
+        self.stdout.write('Successfully import all bookmarks!')
