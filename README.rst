@@ -17,8 +17,9 @@ This is the right way, with ``virtualenv``:
   source virtenv/bin/activate
   pip install -r requirements.txt
   # Create superuser with ``admin`` name
-  python manage syncdb
-  python manage migrate
+  python manage.py syncdb
+  python manage.py migrate
+  python manage.py runserver
 
 Open your browser at ``http://localhost:8000/``.
 
