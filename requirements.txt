@@ -1,4 +1,4 @@
-Django==1.5.1
+Django==1.5.2
 South==0.8.1
 argparse==1.2.1
 beautifulsoup4==4.2.0
