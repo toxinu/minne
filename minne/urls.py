@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     url(r'^api/links', views.LinkList.as_view()),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', include('minne.links.urls')),
+    (r'^browserid/', include('django_browserid.urls')),
 )
 
 if settings.DEBUG:

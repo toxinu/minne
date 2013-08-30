@@ -1,3 +1,4 @@
+{% load browserid %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -10,8 +11,12 @@
     <link rel="stylesheet" type="text/css" href="/static/links/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/static/links/css/bootstrap-responsive.min.css">
     <link rel="stylesheet" type="text/css" href="/static/links/css/links.css">
+    {% browserid_css %}
 </head>
 <body>
+    {% browserid_info %}
     {% block content %}{% endblock %}
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    {% browserid_js %}
 </body>
 </html>
