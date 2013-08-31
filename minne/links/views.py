@@ -20,7 +20,7 @@ from django.http import HttpResponse
 
 class LinkList(APIView):
     def get(self, request, format=None):
-        links = Link.objects.order_by('-id')
+        links = Link.objects.filter(user=request.user).order_by('-id')
         paginator = Paginator(links, 30)
         page = request.QUERY_PARAMS.get('page')
 
@@ -38,7 +38,9 @@ class LinkList(APIView):
         return Response(serializer.data)
 
     def post(self, request, format=None):
-        serializer = LinkSerializer(data=request.DATA)
+        data = request.DATA
+        data['user'] = request.user.id
+        serializer = LinkSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -64,8 +66,10 @@ class LinkDetail(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
     def put(self, request, pk, format=None):
+        data = request.DATA
+        data['user'] = request.user.id
         link = self.get_object(pk)
-        serializer = LinkSerializer(link, data=request.DATA)
+        serializer = LinkSerializer(link, data=data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -75,7 +79,7 @@ class LinkDetail(APIView):
 
 @login_required
 def export_bookmarks(request):
-    links = Link.objects.all()
+    links = Link.objects.filter(user=request.user)
     for link in links:
         link.added = int(mktime(link.added.timetuple()))
     return render_to_response('links/export.html', {"links": links, "date": datetime.datetime.now()})
@@ -83,7 +87,7 @@ def export_bookmarks(request):
 
 @login_required
 def links_search(request):
-    objects = Link.objects.all()
+    objects = Link.objects.filter(user=request.user)
     res = []
     for r in objects:
         link = {

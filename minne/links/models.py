@@ -1,7 +1,9 @@
 import requests
 import datetime
+
 from django.db import models
 from django.contrib import admin
+from django.contrib.auth.models import User
 
 from bs4 import BeautifulSoup
 
@@ -11,6 +13,7 @@ class Link(models.Model):
     title = models.CharField(max_length=300, default="", blank=True)
     added = models.DateField(auto_now_add=True, default=datetime.date.today)
     tags = models.CharField(max_length=300, blank=True)
+    user = models.ForeignKey(User)
 
     def save(self, *args, **kwargs):
         if not self.title:
