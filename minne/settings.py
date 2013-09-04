@@ -152,3 +152,10 @@ LOGGING = {
         },
     }
 }
+
+try:
+    from local_settings import *
+except ImportError:
+    print "WARNING: Unable to load local_settings.py. " \
+          "Copy local_settings_example.py to local_settings.py and edit it."
+    print "WARNING: Using default settings..."
