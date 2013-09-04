@@ -1,4 +1,6 @@
 import os
+PROJECT_DIR = os.path.dirname(__file__)
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -65,10 +67,10 @@ MEDIA_URL = ''
 
 # Static files settings
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(os.path.dirname(__file__), '../static')
+STATIC_ROOT = os.path.join(PROJECT_DIR, '../static')
 STATICFILES_DIRS = (
     # common project's static files
-    os.path.join(os.path.dirname(__file__), 'static'),
+    os.path.join(PROJECT_DIR, 'static'),
 )
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -105,7 +107,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(os.path.dirname(__file__), 'templates'),
+    os.path.join(PROJECT_DIR, 'templates'),
 )
 
 INSTALLED_APPS = (
