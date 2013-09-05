@@ -5,10 +5,11 @@ from minne.links.models import Link
 
 
 class LinkSerializer(serializers.ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField()
 
     class Meta:
         model = Link
-        fields = ('id', 'url', 'title', 'tags', 'added')
+        fields = ('id', 'url', 'title', 'tags', 'added', 'user')
 
 
 class PaginatedLinkSerializer(pagination.PaginationSerializer):

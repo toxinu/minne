@@ -1,7 +1,8 @@
-Django==1.5.1
+Django==1.5.2
 South==0.8.1
 argparse==1.2.1
 beautifulsoup4==4.2.0
 djangorestframework==2.3.5
 requests==1.2.3
 wsgiref==0.1.2
+django-browserid==0.9

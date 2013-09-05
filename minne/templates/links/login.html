@@ -1,4 +1,5 @@
 {% extends "links/base.html" %}
+{% load browserid %}
 
 {% block content %}
 <style type="text/css">
@@ -45,21 +46,11 @@
   <div class="jumbotron">
     <h1>Welcome back.</h1>
     <div class="setup">
-      {% if form.errors %}
-        <p>Your username and password didn't match. Please try again.</p>
-      {% endif %}
-      <form id="welcome-form" method="POST" action="{% url 'django.contrib.auth.views.login' %}">
-        {% csrf_token %}
-        <input style="display: none" name="username" id="username" type="hidden" value="admin" />
-        <div class="control-group">
-          <input style="width: 210px" name="password" id="password" type="password" autofocus="autofocus" />
-          <i class="icon-lock field-icon"></i>
-          <label id="password-label" class="field-label" for="password">Password</label>
-        </div>
-        <br />
-        <button class="btn btn-large btn-primary" type="submit" value="login">Login</button>
-        <input type="hidden" name="next" value="/" />
-      </form>
+        {% if user.is_authenticated %}
+          {% browserid_logout text='Logout' %}
+        {% else %}
+          {% browserid_login text='Login' color='dark' %}
+        {% endif %}
     </div>
   </div>
 
