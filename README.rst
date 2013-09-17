@@ -1,7 +1,7 @@
 Minne
 =====
 
-I'm Minne, your links shelf!
+I'm Minne, your personnal (or not )links shelf which support Persona authentification!
 
 .. image:: https://raw.github.com/socketubs/minne/master/screenshots/screenshot_01.png
 
@@ -18,7 +18,8 @@ This is the right way, with ``virtualenv``:
   virtualenv virtenv
   source virtenv/bin/activate
   pip install -r requirements.txt
-  # Create superuser with ``admin`` name
+  cp minne/local_settings_example.py minne/local_settings.py
+  # Change BROWSERID_CREATE_USER option if your want minne for personnal usage
   python manage.py syncdb
   python manage.py migrate
   python manage.py runserver

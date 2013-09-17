@@ -10,6 +10,8 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+BROWSERID_CREATE_USER = False
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
