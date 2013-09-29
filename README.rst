@@ -37,6 +37,26 @@ This is how to update your Minne: ::
   git pull
   pip install -r requirements.txt -U
 
+Nginx
+-----
+
+For people which want to use it with a https reverse proxy (like Nginx).
+
+In you settings.py: ::
+
+  SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTOCOL', 'https')
+
+In your nginx conf: ::
+
+  location / {
+    proxy_pass http://127.0.0.1:8000;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Protocol https; # Tell django we're using https
+  }
+
+
 License
 -------
 
