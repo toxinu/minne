@@ -27,6 +27,12 @@ Open your browser at ``http://localhost:8000/``.
 
 If you want to use Mozilla Persona authentification take a look at `local_settings.py` file.
 
+Import
+------
+
+You can import bookmarks html file with: ::
+
+  python manage.py import_bookmarks you_file.html
 
 Update
 ------
