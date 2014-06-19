@@ -20,4 +20,4 @@ BROWSERID = False
 # TEMPLATE_CONTEXT_PROCESSORS += ('django_browserid.context_processors.browserid', )
 # Set your site url for security
 # Mandatory for django-browserid when DEBUG = False
-SITE_URL = 'http://www.example.com'
+SITE_URL = 'http://localhost:8000'
