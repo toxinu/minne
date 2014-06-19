@@ -12,19 +12,20 @@ This is the right way, with ``virtualenv``:
 
 ::
 
-  cd /var/www
-  git clone https://github.com/socketubs/minne.git
-  cd minne
+  git clone https://github.com/socketubs/minne.git && cd minne
   virtualenv virtenv
   source virtenv/bin/activate
   pip install -r requirements.txt
   cp minne/local_settings_example.py minne/local_settings.py
-  # Change BROWSERID_CREATE_USER option if your want minne for personnal usage
+  # During syncdb, you'll need to create superuser, use admin as username if
+  # you want to use minne as a single user.
   python manage.py syncdb
   python manage.py migrate
   python manage.py runserver
 
 Open your browser at ``http://localhost:8000/``.
+
+If you want to use Mozilla Persona authentification take a look at `local_settings.py` file.
 
 
 Update
@@ -32,7 +33,6 @@ Update
 
 This is how to update your Minne: ::
 
-  cd /var/www/minne
   source virtenv/bin/activate
   git pull
   pip install -r requirements.txt -U

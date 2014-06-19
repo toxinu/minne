@@ -1,4 +1,3 @@
-{% load browserid %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -10,12 +9,14 @@
     <link rel="stylesheet" type="text/css" href="/static/links/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/static/links/css/bootstrap-responsive.min.css">
     <link rel="stylesheet" type="text/css" href="/static/links/css/links.css">
-    {% browserid_css %}
+    {% if BROWSERID %}{% browserid_css %}{% endif %}
 </head>
 <body>
-    {% browserid_info %}
+    {% if BROWSERID %}{% browserid_info %}{% endif %}
     {% block content %}{% endblock %}
-    <script src="/static/links/js/jquery-1.9.1.min.js"></script>
-    {% browserid_js %}
+    {% if BROWSERID %}
+        <script src="/static/links/js/jquery-1.9.1.min.js"></script>
+        {% browserid_js %}
+    {% endif %}
 </body>
 </html>

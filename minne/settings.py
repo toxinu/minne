@@ -10,8 +10,6 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-BROWSERID_CREATE_USER = False
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -32,7 +30,7 @@ REST_FRAMEWORK = {
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = []
 
-LOGIN_URL="/login"
+LOGIN_URL = "/login"
 
 # Path to redirect to on successful login.
 LOGIN_REDIRECT_URL = '/'
@@ -57,11 +55,11 @@ SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
-USE_I18N = True
+USE_I18N = False
 
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale.
-USE_L10N = True
+USE_L10N = False 
 
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
@@ -95,7 +93,6 @@ SECRET_KEY = 'd%^#&g3o#bz9*b@0axc&)#28p!!6rq933481gt0!=ax67k-xf$'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -121,18 +118,13 @@ TEMPLATE_DIRS = (
     os.path.join(PROJECT_DIR, 'templates'),
 )
 
-# Add the django_browserid authentication backend.
 AUTHENTICATION_BACKENDS = (
-   'django.contrib.auth.backends.ModelBackend', # required for admin
-   'django_browserid.auth.BrowserIDBackend',
-)
+    'django.contrib.auth.backends.ModelBackend', )
 
 INSTALLED_APPS = (
     'django.contrib.auth',
-    'django_browserid',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    # 'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
@@ -143,8 +135,8 @@ INSTALLED_APPS = (
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
+    'minne.context_processors.expose_settings',
     'django.contrib.auth.context_processors.auth',
-    'django_browserid.context_processors.browserid',
     'django.core.context_processors.debug',
     'django.core.context_processors.i18n',
     'django.core.context_processors.media',
@@ -185,6 +177,7 @@ LOGGING = {
 try:
     from local_settings import *
 except ImportError:
-    print "WARNING: Unable to load local_settings.py. " \
-          "Copy local_settings_example.py to local_settings.py and edit it."
-    print "WARNING: Using default settings..."
+    print(
+        "WARNING: Unable to load local_settings.py. "
+        "Copy local_settings_example.py to local_settings.py and edit it.")
+    print("WARNING: Using default settings...")
