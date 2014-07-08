@@ -94,7 +94,7 @@ def links_search(request):
             "id": r.id,
             "title": r.title,
             "url": r.url,
-            "tags": r.tags.replace(' ', ','),
+            "tags": r.tags,
             "added": r.added.strftime('%y/%m/%d')}
         res.append(link)
     return HttpResponse(json.dumps(res), content_type="application/json")
