@@ -64,8 +64,8 @@ function LinkListCtrl($scope, $http, $location, Link) {
             $scope.info.count = 0;
             for (var i=0;i<terms.length;i++) {
                var res = $scope.index.search(terms);
-               for (var i=0;i<res.length;i++) {
-                   $scope.links.push($scope.indexLookup[res[i].ref]);
+               for (var ii=0;ii<res.length;ii++) {
+                   $scope.links.push($scope.indexLookup[res[ii].ref]);
                }
                $scope.info.count = $scope.info.count + res.length; 
             }
