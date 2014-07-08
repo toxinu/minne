@@ -62,6 +62,12 @@ In your nginx conf: ::
     proxy_set_header X-Forwarded-Protocol https; # Tell django we're using https
   }
 
+Bookmarklet
+-----------
+
+Change `https://links.socketubs.org` to your minne location.
+
+<a href="javascript:(function(){ window.open("https://links.socketubs.org/#/add?url="+encodeURIComponent(location.href)+"&title="+encodeURIComponent(document.title)); })();">Minne</a>
 
 License
 -------
