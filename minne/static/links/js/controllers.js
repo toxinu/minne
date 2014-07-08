@@ -58,15 +58,17 @@ function LinkListCtrl($scope, $http, $location, Link) {
 
     $scope.search = function(terms) {
         var search = function() {
-            var res = $scope.index.search(terms);
+            var terms = terms.trim().split(/\s+/);
             // Reset scope.links
             $scope.links = [];
-            for (var i=0;i<res.length;i++) {
-                console.log(res[i])
-                $scope.links.push($scope.indexLookup[res[i].ref]);
+            $scope.info.count = 0;
+            for (var i=0;i<terms.length;i++) {
+               var res = $scope.index.search(terms);
+               for (var i=0;i<res.length;i++) {
+                   $scope.links.push($scope.indexLookup[res[i].ref]);
+               }
+               $scope.info.count = $scope.info.count + res.length; 
             }
-            console.log('Results : ' + res);
-            $scope.info.count = res.length;
         }
 
         if (!terms) {
