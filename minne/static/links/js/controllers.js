@@ -142,8 +142,10 @@ function LinkAddCtrl($scope, $http, $location, $routeParams, Link, showAlert) {
         tags: ''
     }
     
-    if ($routeParams.url)
+    if ($routeParams.url) {
         defaultForm.url = $routeParams.url;
+        $scope.url = $routeParams.url;
+    }
 
     $scope.resetForm = function() {
         document.getElementById('add-link').reset();
