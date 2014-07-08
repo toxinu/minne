@@ -58,13 +58,13 @@ function LinkListCtrl($scope, $http, $location, Link) {
 
     $scope.search = function(terms) {
         var search = function() {
-            var terms = terms.trim().split(/\s+/);
+            var termsArray = terms.trim().split(/\s+/);
             // Reset scope.links
             $scope.links = [];
             $scope.info.count = 0;
-            for (var i=0;i<terms.length;i++) {
+            for (var i=0;i<termsArray.length;i++) {
                var term = terms[i];
-               var res = $scope.index.search(term);
+               var res = $scopeArray.index.search(term);
                for (var ii=0;ii<res.length;ii++) {
                    $scope.links.push($scope.indexLookup[res[ii].ref]);
                }
