@@ -135,12 +135,14 @@ function LinkListCtrl($scope, $http, $location, Link) {
 function ImportCtrl($scope, $rootScope) {
 }
 
-function LinkAddCtrl($scope, $http, $location, Link, showAlert) {
+function LinkAddCtrl($scope, $http, $location, $routeParams, Link, showAlert) {
     var defaultForm = {
         url: '',
         title: '',
         tags: ''
     }
+    
+    console.log($routeParams)
 
     $scope.resetForm = function() {
         document.getElementById('add-link').reset();
