@@ -69,7 +69,7 @@ Change `https://links.socketubs.org` to your minne location.
 
 ::
 
-  javascript:(function(){ window.open("https://links.socketubs.org/#/add?url="+encodeURIComponent(location.href)+"&title="+encodeURIComponent(document.title)); })();"
+  javascript:(function(){ window.open("https://links.socketubs.org/#/add?url="+encodeURIComponent(location.href)+"&title="+encodeURIComponent(document.title)); })();
 
 License
 -------
