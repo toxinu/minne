@@ -17,7 +17,7 @@ class Link(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.title:
-            _r = requests.get(self.url)
+            _r = requests.get(self.url, verify=False)
             if _r.status_code != 200:
                 self.title = self.url
             else:
