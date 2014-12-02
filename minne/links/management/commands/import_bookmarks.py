@@ -3,6 +3,7 @@ from optparse import make_option
 
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
+from django.core.management.base import CommandError
 from minne.links.models import Link
 from bs4 import BeautifulSoup
 
@@ -16,17 +17,18 @@ class Command(BaseCommand):
             action='store',
             type='int',
             dest='user_id',
-            help='Set owner of imported links'))
+            default=1,
+            help='Set owner of imported links'), )
 
     def handle(self, *args, **options):
         file_path = args[0]
         file = open(file_path, 'rb')
         self.stdout.write('=> Importing %s...' % file_path.split('/')[-1])
         soup = BeautifulSoup(file.read())
-        user_id = options['user_id']
-        if not user_id:
-            user_id = 1
-        user = User.objects.get(user_id)
+        try:
+            user = User.objects.get(id=options['user_id'])
+        except:
+            raise CommandError("User id doesn't exist.")
 
         for td in soup.find_all('dt')[::-1]:
             self.stdout.write(td.a.get('href'))
