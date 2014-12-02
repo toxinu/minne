@@ -18,7 +18,7 @@
 
   /* Main marketing message and sign up button */
   .jumbotron {
-    margin: 60px 0;
+    margin: 30px 0;
     text-align: center;
   }
   .jumbotron h1 {
@@ -31,43 +31,42 @@
   }
 </style>
 <div class="container-narrow">
-
   <div class="masthead">
     <ul class="nav nav-pills pull-right">
       <li><a href="https://github.com/socketubs/minne">Github</a></li>
       <li><a href="http://socketubs.org">Socketubs</a></li>
     </ul>
-    <h3 class="muted">Minne</h3>
+    <h3 class="text-muted">Minne</h3>
   </div>
-
   <hr>
-
   <div class="jumbotron">
     <h1>Welcome back.</h1>
     <div class="setup">
-        {% if BROWSERID %}
-            {% if user.is_authenticated %}
-                {% browserid_logout text='Logout' %}
-            {% else %}
-                {% browserid_login text='Login' color='dark' %}
-            {% endif %}
+      {% if BROWSERID %}
+        {% if user.is_authenticated %}
+          {% browserid_logout text='Logout' %}
         {% else %}
-            {% if form.errors %}
-                <p>Your username and password didn't match. Please try again.</p>
-            {% endif %}
-            <form id="welcome-form" method="POST" action="{% url 'django.contrib.auth.views.login' %}">
-            {% csrf_token %}
-                <input style="display: none" name="username" id="username" type="hidden" value="admin" />
-                    <div class="control-group">
-                        <input style="width: 210px" name="password" id="password" type="password" autofocus="autofocus" />
-                        <i class="icon-lock field-icon"></i>
-                        <label id="password-label" class="field-label" for="password">Password</label>
-                    </div>
-                    <br />
-                    <button class="btn btn-large btn-primary" type="submit" value="login">Login</button>
-                    <input type="hidden" name="next" value="/" />
-            </form>
+          {% browserid_login text='Login' color='dark' %}
         {% endif %}
+      {% else %}
+        {% if form.errors %}
+          <p>Your username and password didn't match. Please try again.</p>
+        {% endif %}
+        <form id="welcome-form" method="POST" action="{% url 'django.contrib.auth.views.login' %}">
+        {% csrf_token %}
+          <input style="display: none" name="username" id="username" type="hidden" value="admin" />
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon">Password</div>
+              <input type="password" class="form-control" name="password" id="password" autofocus="autofocus">
+            </div>
+          </div>
+
+          <br />
+          <button class="btn btn-large btn-primary" type="submit" value="login">Login</button>
+          <input type="hidden" name="next" value="/" />
+        </form>
+      {% endif %}
     </div>
   </div>
 

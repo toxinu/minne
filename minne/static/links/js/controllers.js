@@ -129,7 +129,6 @@ function LinkListCtrl($scope, $http, $location, Link) {
     $scope.refresh();
     $scope.indexModified = false;
     $scope.inSearch = false;
-    document.getElementById('nav-bar').className = "affix";
 }
 
 function ImportCtrl($scope, $rootScope) {

@@ -1,19 +1,31 @@
-<div class="row-fluid" fadey="300">
-    <div class="span12">
-        <h2>Add Link</h2>
-        <form id="add-link" ng-submit="addLink(url, title, tags, true)">
-            <fieldset>
-                <label>URL</label>
-                <input class="input-xxlarge" ng-model="url" type="text" autofocus>
-                <label>Title</label>
-                <input class="input-xxlarge" ng-model="title" type="text">
-                <label>Tags (separate with space)</label>
-                <input placeholder="indie game lua" class="input-xlarge" ng-model="tags" type="text">
-                </label>
-                <br />
-                <button type="submit" class="btn btn-success">Submit</button>
-                <input type="reset" class="btn btn-warning" value="Reset Form">
-            </fieldset>
-        </form>
-    </div>
+<div class="row" fadey="300">
+  <div class="col-md-12">
+    <h2>Add Link</h2>
+    <form id="add-link" class="form-horizontal" role="form" ng-submit="addLink(url, title, tags, true)">
+      <div class="form-group">
+        <label class="col-sm-2 control-label">URL</label>
+        <div class="col-sm-10">
+          <input ng-model="url" type="url" class="form-control" autofocus="autofocus">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Title</label>
+        <div class="col-sm-10">
+          <input ng-model="text" type="text" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Tags (separate with space)</label>
+        <div class="col-sm-10">
+          <input ng-model="tags" type="text" class="form-control" placeholder="indie game lua">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-success">Submit</button>
+          <input type="reset" class="btn btn-warning" value="Reset Form">
+        </div>
+      </div>
+    </form>
+  </div>
 </div>

@@ -1,41 +1,31 @@
-<div class="row-fluid" fadey="400">
-    <div id="menu" class="span3 visible-desktop">
-        <div id="nav-bar" data-spy="affix">
+<div class="row" fadey="400">
+    <div id="menu" class="col-md-12 visible-desktop">
+        <div id="nav-bar">
             <h2>Search</h2>
-            <form class="form-search">
-                <input ng-model="query" class="input-medium search-query" name="search" id="search" type="text" autofocus="autofocus" />
-                <br />
-                <br />
-                <button type="submit" class="btn" ng-click="search(query)">Search</button>
+            <form class="form-inline form-search" role="form">
+              <div class="form-group">
+                <div class="input-group">
+                  <input ng-model="query" type="text" class="form-control search-query" name="search"id="search" placeholder="Python programming..." autofocus="autofocus">
+                </div>
+              </div>
+              <button type="submit" class="btn btn-default" ng-click="search(query)">Search</button>
             </form>
-            <div ng-controller="LinkAddCtrl">
-                <h2>Add Link</h2>
-                <form id="add-link" ng-submit="addLink(form.url, form.title, form.tags)">
-                    <fieldset>
-                        <label>URL</label>
-                        <input class="input-xlarge" ng-model="form.url" type="text">
-                        <label>Title</label>
-                        <input class="input-xlarge" ng-model="form.title" type="text">
-                        <label>Tags (separate with space)</label>
-                        <input placeholder="indie game lua" class="input-xlarge" ng-model="form.tags" type="text">
-                        </label>
-                        <br />
-                        <button type="submit" class="btn btn-success">Submit</button>
-                        <input type="reset" class="btn btn-warning" value="Reset Form">
-                    </fieldset>
-                </form>
-            </div>
         </div>
     </div>
-
-    <div class="span9">
-        <h2 fadey="500">Links ({{ info.count }})</h2>
-        <ul ng-show="links.length >= 1" id="links-list" class="unstyled">
-            <li data-id="{{ link.id }}" ng-repeat="link in links | orderBy:'id':true" fadey="500">
-                <a target="_blank" href="{{ link.url }}">{{ link.title }}</a> (<a href="#/edit/{{ link.id }}"><i class="icon-edit"></i></a> | <a href="" ng-click="remove($index)"><i class="icon-remove"></i></a>) - <span class="muted">Added: {{ link.added }}</span> <span class="muted" ng-show="link.tags">- Tags: {{ link.tags }}</span>
+    <div class="col-md-12">
+        <h2 fadey="500">Links <span class="badge" style="vertical-align: middle">{{ info.count }}</span></h2>
+        <ul ng-show="links.length >= 1" id="links-list" class="list-group">
+            <li class="list-group-item" data-id="{{ link.id }}" ng-repeat="link in links | orderBy:'id':true" fadey="500">
+                <a target="_blank" href="{{ link.url }}"><strong>{{ link.title }}</strong></a>
+                <span class="text-muted small" ng-show="link.tags"> {{ link.tags }}</span>
+                <span class="pull-right">
+                    <span class="label label-default">Added: {{ link.added }}</span>
+                    <a href="#/edit/{{ link.id }}" class="label label-primary">Edit</a>
+                    <a href="" ng-click="remove($index)" class="label label-warning">Remove</a>
+                </span>
             </li>
         </ul>
         <p ng-show="links.length == 0">No links, sorry...</p>
-        <button fadey="700" ng-show="!inSearch && info.next" id="load-more" class="btn btn-primary" ng-click="loadMore()" style="width: 100%"> Load More </button>
+        <button fadey="700" ng-show="!inSearch && info.next" id="load-more" class="btn btn-primary" ng-click="loadMore()" style="width:100%;margin-bottom:10px"> Load More </button>
     </div>
 </div>

@@ -7,43 +7,35 @@
     <script type="text/javascript" src="/static/links/js/links.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/static/links/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/static/links/css/links.min.css">
-    <style>
-      @media (min-width: 920px) {
-        body {
-          padding-top: 60px;
-        }
-      }
-    </style>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="brand" href="#" onclick="switchPage('home')">Minne</a>
-          <div class="nav-collapse collapse">
-            <ul class="nav bar-list">
-              <li id="home-bar" class="active"><a href="#" onclick="switchPage('home')">Home</a></li>
-              <li id="add-bar"><a href="#add" onclick="switchPage('add')">Add</a></li>
-              <li id="import-bar"><a href="#import" onclick="switchPage('import')">Import</a></li>
-              <li id="export-bar"><a target="_blank" href="/api/export">Export</a></li>
-            </ul>
-            <ul class="nav pull-right">
-              <li id="logout-bar"><a href="/logout?next=/login">Logout</a></li>
-            </ul>
-          </div>
-        </div>
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#" onclick="switchPage('home')">Minne</a>
       </div>
+       <ul class="nav navbar-nav navbar-left">
+          <li id="home-bar" class="active"><a href="#" onclick="switchPage('home')">Home</a></li>
+          <li id="add-bar"><a href="#add" onclick="switchPage('add')">Add</a></li>
+          <li id="import-bar"><a href="#import" onclick="switchPage('import')">Import</a></li>
+          <li id="export-bar"><a target="_blank" href="/api/export">Export</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li id="logout-bar"><a href="/logout?next=/login">Logout</a></li>
+        </ul>
     </div>
-    <div class="container">
-      <div class="row-fluid">
-        <div class="span12"><div id="notifications" style="position:absolute;z-index:100;right:1%"></div></div>
-      </div>
-      <div ng-view></div>
+  </nav>
+  <div class="container">
+    <div class="row-fluid">
+      <div class="col-md-12"><div id="notifications" style="position:absolute;z-index:100;right:1%"></div></div>
     </div>
+    <div ng-view></div>
+  </div>
 </body>
 </html>
