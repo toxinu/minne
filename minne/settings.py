@@ -59,7 +59,7 @@ USE_I18N = False
 
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale.
-USE_L10N = False 
+USE_L10N = False
 
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
@@ -106,6 +106,8 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
+
 ROOT_URLCONF = 'minne.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
@@ -131,7 +133,6 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'minne.links',
     'rest_framework',
-    'south',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
