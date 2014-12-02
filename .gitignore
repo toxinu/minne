@@ -2,3 +2,5 @@ virtenv
 *.db
 *.pyc
 minne/local_settings.py
+node_modules/
+npm-debug.log
