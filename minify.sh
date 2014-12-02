@@ -40,7 +40,7 @@ if [ -z $(which npm) ]; then
 else
     if [ -z "$MINCSS" ]; then
         echo ":: Installing css minifier"
-        sudo npm install -g uglifycss
+        sudo npm install -g uglifycss@0.0.9
         MINCSS=$(which uglifycss)
     fi
     if [ -z "$MINJS" ]; then
@@ -81,14 +81,12 @@ md5sum $STATIC_PATH/js/links.min.js
 
 echo ":: Minify css"
 
-for i in bootstrap flat-ui; do
-    $MINCSS $STATIC_PATH/css/${i}.css > $STATIC_PATH/css/${i}.min.css
-    md5sum $STATIC_PATH/css/${i}.min.css
-done
+# for i in bootstrap flat-ui; do
+#     $MINCSS $STATIC_PATH/css/${i}.css > $STATIC_PATH/css/${i}.min.css
+#     md5sum $STATIC_PATH/css/${i}.min.css
+# done
 
-$MINCSS $STATIC_PATH/css/flat-ui.min.css \
-    $STATIC_PATH/css/font-awesome.min.css \
-    $STATIC_PATH/css/bootstrap-responsive.css \
+$MINCSS $STATIC_PATH/css/bootstrap.min.css \
     $STATIC_PATH/css/links.css \
     > $STATIC_PATH/css/links.min.css
 md5sum $STATIC_PATH/css/links.min.css
